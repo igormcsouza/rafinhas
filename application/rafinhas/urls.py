@@ -13,14 +13,14 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
+
 from django.urls import path, include
-# Authetication token generator!
-from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
+from . import views
+from rest_framework import routers
+
+router = routers.DefaultRouter()
+router.register('usuario', views.UsuarioView)
 
 urlpatterns = [
-    path('', include('rafinhas.urls')),
-    path('admin/', admin.site.urls),
-    path('auth/', obtain_jwt_token),
-    path('refresh/', refresh_jwt_token)
+    path('', include(router.urls))
 ]
