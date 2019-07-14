@@ -7,7 +7,7 @@ class Carro(models.Model):
 
     def __str__(self):
         return self.modelo
-        
+
 class Cliente(models.Model):
     nome = models.CharField(max_length=25)
     telefone1 = models.CharField(max_length=14)
@@ -15,7 +15,7 @@ class Cliente(models.Model):
     carro = models.ForeignKey(
         'Carro',
         on_delete=models.CASCADE,
-        null=True
+        default=1
     )
 
     def __str__(self):
