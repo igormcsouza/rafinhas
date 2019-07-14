@@ -21,6 +21,7 @@ from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
 urlpatterns = [
     path('', include('rafinhas.urls')),
     path('admin/', admin.site.urls),
+    path('/rest-auth', include('rest_framework.urls')),
     path('auth/', obtain_jwt_token),
     path('refresh/', refresh_jwt_token)
 ]

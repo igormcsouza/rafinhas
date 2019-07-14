@@ -19,7 +19,16 @@ from . import views
 from rest_framework import routers
 
 router = routers.DefaultRouter()
-router.register('usuario', views.UsuarioView)
+router.register('cliente', views.ClienteView)
+router.register('carro', views.CarroView)
+router.register('defeito', views.DefeitoView)
+router.register('servico', views.ServicoView)
+router.register('operacao', views.OperacaoView)
+router.register('pagamento', views.PagamentoView)
+router.register('forma-de-pagamento', views.FormaDePagamentoView)
+router.register('saida', views.SaidaView)
+router.register('funcionario', views.FuncionarioView)
+router.register('cargo', views.CargoView)
 
 urlpatterns = [
     path('', include(router.urls))
