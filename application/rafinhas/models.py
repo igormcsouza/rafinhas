@@ -1,20 +1,25 @@
 from django.db import models
 
 ## Cliente
-class Cliente(models.Model):
-    nome = models.CharField(max_length=25)
-    telefone1 = models.CharField(max_length=14)
-    telefone2 = models.CharField(max_length=14)
-
-    def __str__(self):
-        return self.nome
-
 class Carro(models.Model):
     placa = models.CharField(max_length=7)
     modelo = models.CharField(max_length=25)
 
     def __str__(self):
         return self.modelo
+        
+class Cliente(models.Model):
+    nome = models.CharField(max_length=25)
+    telefone1 = models.CharField(max_length=14)
+    telefone2 = models.CharField(max_length=14)
+    carro = models.ForeignKey(
+        'Carro',
+        on_delete=models.CASCADE,
+        null=True
+    )
+
+    def __str__(self):
+        return self.nome
 
 ## Serviços 
 class Defeito(models.Model):

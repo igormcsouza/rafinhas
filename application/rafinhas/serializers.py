@@ -4,7 +4,7 @@ from . import models
 class ClienteSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = models.Cliente
-        fields = ('url', 'id', 'nome', 'telefone1', 'telefone2')
+        fields = ('url', 'id', 'nome', 'telefone1', 'telefone2', 'carro')
 
 class CarroSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
