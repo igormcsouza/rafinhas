@@ -1,72 +1,92 @@
 from django.db import models
+import datetime
 
 ## Cliente
-class Carro(models.Model):
-    placa = models.CharField(max_length=7)
-    modelo = models.CharField(max_length=25)
-
-    def __str__(self):
-        return self.modelo
-
 class Cliente(models.Model):
     nome = models.CharField(max_length=25)
     telefone1 = models.CharField(max_length=14)
-    telefone2 = models.CharField(max_length=14)
-    carro = models.ForeignKey(
-        'Carro',
-        on_delete=models.CASCADE,
-        default=1
-    )
+    telefone2 = models.CharField(max_length=14, null=True)
 
     def __str__(self):
         return self.nome
 
-## Serviços 
+class Carro(models.Model):
+    placa = models.CharField(max_length=7, unique=True)
+    modelo = models.CharField(max_length=25)
+    cliente = models.ForeignKey(
+        Cliente,
+        on_delete=models.CASCADE,
+        default= Cliente.objects.first().id
+    )
+
+    def __str__(self):
+        return self.modelo
+
 class Defeito(models.Model):
     tipo = models.CharField(max_length=25)
-    descricao = models.CharField(max_length=25)
+    descricao = models.TextField()
+    carro = models.ForeignKey(
+        Carro,
+        on_delete=models.CASCADE,
+        default=Carro.objects.first().id
+    )
 
     def __str__(self):
-        return self.tipo
+        return self.tipo + 'no carro ' + 'PLACA'
 
-class Servico(models.Model):
-    codigo = models.CharField(max_length=25)
-    tipo = models.CharField(max_length=25)
-    entrada = models.DateTimeField(auto_now_add=True, blank=True)
-    saida = models.DateTimeField()
-    finalizado = models.BooleanField()
-    comentarios = models.TextField()
+class Imagem(models.Model):
+    pass
 
-    def __str__(self):
-        return self.codigo
-
-class Operacao(models.Model):
-    tipo = models.CharField(max_length=25)
-    valor = models.FloatField()
-    comentarios = models.TextField()
+## Serviços
+class Financas(models.Model):
+    caracteristica = models.CharField(max_length=10)
+    data = models.DateField(default=datetime.date.today)
 
     def __str__(self):
-        return str(self.tipo) 
+        return self.caracteristica + ' do dia ' + str(self.data)
 
-# Financeiro
 class Pagamento(models.Model):
     efetuado = models.BooleanField()
-    valor = models.FloatField()
+    valor = models.FloatField(null=True)
+    financas = models.ForeignKey(
+        Financas,
+        on_delete=models.CASCADE,
+        default=Financas.objects.first().id
+    )
 
     def __str__(self):
-        return str(self.valor)
+        return 'Valor de ' + str(self.valor) 
 
 class FormaDePagamento(models.Model):
     tipo = models.CharField(max_length=25)
     valor = models.FloatField()
+    pagamento = models.ForeignKey(
+        Pagamento,
+        on_delete=models.CASCADE,
+        default=Pagamento.objects.first().id
+    )
 
     def __str__(self):
         return self.tipo
 
-class Saida(models.Model):
+class Operacao(models.Model):
+    tipo = models.CharField(max_length=25)
+    valor = models.FloatField()
+    comentarios = models.TextField(null=True)
+
+    def __str__(self):
+        return str(self.tipo) 
+
+# Financeir0
+class Retirada(models.Model):
     tipo = models.CharField(max_length=25)
     valor = models.FloatField()
     data = models.DateTimeField(auto_now_add=True, blank=True)
+    financas = models.ForeignKey(
+        Financas,
+        on_delete=models.CASCADE,
+        default=Financas.objects.first().id
+    )
 
     def __str__(self):
         return self.tipo
@@ -75,13 +95,36 @@ class Saida(models.Model):
 class Funcionario(models.Model):
     nome = models.CharField(max_length=25)
     loggin = models.CharField(max_length=25)
+    papel = models.CharField(max_length=25, null=True)
 
     def __str__(self):
         return self.nome
 
-class Cargo(models.Model):
+class Servico(models.Model):
+    codigo = models.CharField(max_length=25)
     tipo = models.CharField(max_length=25)
+    entrada = models.DateField(auto_now_add=True, blank=True)
+    saida = models.DateField(default=datetime.date.today, null=True)
+    finalizado = models.BooleanField()
+    comentarios = models.TextField(null=True)
+    pagamento = models.ForeignKey(
+        Pagamento,
+        on_delete=models.CASCADE,
+        null=True
+    )
+    operacao = models.ForeignKey(
+        Operacao,
+        on_delete=models.CASCADE,
+        default=Operacao.objects.first().id
+    )
+    operador = models.ForeignKey(
+        Funcionario,
+        on_delete=models.CASCADE,
+        default=Funcionario.objects.first().id
+    )
+
+    # Deve haver mais um campo para vendedor
 
     def __str__(self):
-        return self.tipo
+        return self.codigo + ' - ' + self.tipo
     

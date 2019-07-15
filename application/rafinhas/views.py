@@ -23,6 +23,10 @@ class OperacaoView(viewsets.ModelViewSet):
     queryset = models.Operacao.objects.all()
     serializer_class = serializers.OperacaoSerializer
 
+class FinancasView(viewsets.ModelViewSet):
+    queryset = models.Financas.objects.all()
+    serializer_class = serializers.FinancasSerializer
+
 class PagamentoView(viewsets.ModelViewSet):
     queryset = models.Pagamento.objects.all()
     serializer_class = serializers.PagamentoSerializer
@@ -31,15 +35,12 @@ class FormaDePagamentoView(viewsets.ModelViewSet):
     queryset = models.FormaDePagamento.objects.all()
     serializer_class = serializers.FormaDePagamentoSerializer
 
-class SaidaView(viewsets.ModelViewSet):
-    queryset = models.Saida.objects.all()
-    serializer_class = serializers.SaidaSerializer
+class RetiradaView(viewsets.ModelViewSet):
+    queryset = models.Retirada.objects.all()
+    serializer_class = serializers.RetiradaSerializer
 
 class FuncionarioView(viewsets.ModelViewSet):
     queryset = models.Funcionario.objects.all()
     serializer_class = serializers.FuncionarioSerializer
 
-class CargoView(viewsets.ModelViewSet):
-    queryset = models.Cargo.objects.all()
-    serializer_class = serializers.CargoSerializer
 

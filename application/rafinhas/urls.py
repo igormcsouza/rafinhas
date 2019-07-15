@@ -24,11 +24,11 @@ router.register('carro', views.CarroView)
 router.register('defeito', views.DefeitoView)
 router.register('servico', views.ServicoView)
 router.register('operacao', views.OperacaoView)
+router.register('financas', views.FinancasView)
 router.register('pagamento', views.PagamentoView)
 router.register('forma-de-pagamento', views.FormaDePagamentoView)
-router.register('saida', views.SaidaView)
+router.register('retirada', views.RetiradaView)
 router.register('funcionario', views.FuncionarioView)
-router.register('cargo', views.CargoView)
 
 urlpatterns = [
     path('', include(router.urls))
