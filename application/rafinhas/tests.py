@@ -1,13 +1,41 @@
 from django.test import TestCase
-from . import models
+from .models import *
 
 class Fluxo(TestCase):
     def novoCliente():
-        cliente = models.Cliente(
-            nome="Sergio Mouro", 
-            telefone1="85 987451369", 
-            telefone2="85 999763258"
-        )
-        cliente.save()
-        carro = models.Carro(placa="DEW8733", modelo="CHEVROLET", cliente=cliente)
-        carro.save()
+        Cliente.objects.all()
+        joao = Cliente(nome="Joao Cardoso", telefone1='85998754774')
+        joao.save()
+        print(joao.id)
+        
+        sandero = Carro(placa='CDE7847', modelo='Sandeiro')
+        sandero.save()
+        sandero.cliente = joao
+        print(sandero.cliente)
+        sandero.modelo='Sandero'
+
+        arranhao = Defeito(tipo='Arranhao', descricao='Na parte superior esquerda', carro=sandero)
+
+        servico = Servico()
+        servico.codigo='ASW123'
+        servico.tipo='Lavagem'
+        servico.finalizado=False
+        servico.comentarios='Vai pegar no fim do dia'
+
+        dede = Funcionario(nome='Dede', loggin='1', papel='Operador')
+        servico.operador = dede
+        dede.save()
+
+        sandero.save()
+        arranhao.save()
+        
+        lavagem = Operacao(tipo='Lavagem', valor=10.00)
+        lavagem.save()
+
+        servico.operacao=lavagem
+        servico.save()
+        print(servico)
+
+        servico.carro=sandero
+        print(Defeito.objects.filter(carro=servico.carro))
+
