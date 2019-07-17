@@ -3,7 +3,7 @@
 ## Sumário
 1. [Sumário](#Sumário)
 2. [Motivação](#Motivação)
-3. [Como executar em seu compultador?](#Como-executar-em-seu-compultador?)
+3. [Como executar em seu compultador?](#Como-executar-em-seu-compultador)
 4. [Estudos Importantes](#Estudos-Importantes)
 5. [Problemas Solucionados](#problemas-solucionados)
 
