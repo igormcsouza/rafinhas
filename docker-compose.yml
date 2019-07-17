@@ -10,6 +10,8 @@ services:
     ports:
       - 5432:5432
     environment:
+      TZ: America/Bahia
+      PGTZ: America/Bahia
       POSTGRES_USER: rafinhas
       POSTGRES_PASSWORD: secret
 
