@@ -20,8 +20,8 @@ class ServicoSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = models.Servico
         fields = ('url', 'id', 
-            'codigo', 'tipo', 'entrada', 'saida', 'finalizado', 'comentarios', 'pagamento',
-            'operacao', 'operador'
+            'codigo', 'tipo', 'carro', 'entrada', 'saida', 'finalizado', 
+            'comentarios', 'pagamento', 'operacao', 'operador'
         )
 
 class OperacaoSerializer(serializers.HyperlinkedModelSerializer):

@@ -32,7 +32,7 @@ class Defeito(models.Model):
     )
 
     def __str__(self):
-        return self.tipo + 'no carro ' + 'PLACA'
+        return self.tipo + ' no carro ' + self.carro.placa
 
 class Imagem(models.Model):
     pass
@@ -103,6 +103,11 @@ class Funcionario(models.Model):
 class Servico(models.Model):
     codigo = models.CharField(max_length=25)
     tipo = models.CharField(max_length=25)
+    carro = models.ForeignKey(
+        Carro,
+        on_delete=models.CASCADE,
+        default=1
+    )
     entrada = models.DateField(auto_now_add=True, blank=True)
     saida = models.DateField(default=datetime.date.today, null=True)
     finalizado = models.BooleanField()
