@@ -29,15 +29,15 @@ class OperacaoSerializer(serializers.HyperlinkedModelSerializer):
         model = models.Operacao
         fields = ('url', 'id', 'tipo', 'valor', 'comentarios')
 
-class FinancasSerializer(serializers.HyperlinkedModelSerializer):
+class TransacaoSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = models.Financas
+        model = models.Transacao
         fields = ('url', 'id', 'caracteristica', 'data')
 
 class PagamentoSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = models.Pagamento
-        fields = ('url', 'id', 'efetuado', 'valor', 'financas')
+        fields = ('url', 'id', 'efetuado', 'valor', 'transacao')
 
 class FormaDePagamentoSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -47,7 +47,7 @@ class FormaDePagamentoSerializer(serializers.HyperlinkedModelSerializer):
 class RetiradaSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = models.Retirada
-        fields = ('url', 'id', 'tipo', 'valor', 'data', 'financas')
+        fields = ('url', 'id', 'tipo', 'valor', 'data', 'transacao')
 
 class FuncionarioSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:

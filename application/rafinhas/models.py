@@ -38,20 +38,20 @@ class Imagem(models.Model):
     pass
 
 ## Serviços
-class Financas(models.Model):
+class Transacao(models.Model):
     caracteristica = models.CharField(max_length=10)
     data = models.DateField(default=datetime.date.today)
 
     def __str__(self):
-        return self.caracteristica + ' do dia ' + str(self.data)
+        return self.caracteristica + 's do dia ' + str(self.data)
 
 class Pagamento(models.Model):
     efetuado = models.BooleanField()
     valor = models.FloatField(null=True)
-    financas = models.ForeignKey(
-        Financas,
+    transacao = models.ForeignKey(
+        Transacao,
         on_delete=models.CASCADE,
-        default=1 #Financas.objects.first().id
+        default=1 #Transacao.objects.first().id
     )
 
     def __str__(self):
@@ -82,10 +82,10 @@ class Retirada(models.Model):
     tipo = models.CharField(max_length=25)
     valor = models.FloatField()
     data = models.DateTimeField(auto_now_add=True, blank=True)
-    financas = models.ForeignKey(
-        Financas,
+    transacao = models.ForeignKey(
+        Transacao,
         on_delete=models.CASCADE,
-        default=1 #Financas.objects.first().id
+        default=1 #Transacao.objects.first().id
     )
 
     def __str__(self):

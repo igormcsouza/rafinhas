@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.http import HttpResponse
 from rest_framework import viewsets
 from . import models
 from . import serializers
@@ -23,9 +24,9 @@ class OperacaoView(viewsets.ModelViewSet):
     queryset = models.Operacao.objects.all()
     serializer_class = serializers.OperacaoSerializer
 
-class FinancasView(viewsets.ModelViewSet):
-    queryset = models.Financas.objects.all()
-    serializer_class = serializers.FinancasSerializer
+class TransacaoView(viewsets.ModelViewSet):
+    queryset = models.Transacao.objects.all()
+    serializer_class = serializers.TransacaoSerializer
 
 class PagamentoView(viewsets.ModelViewSet):
     queryset = models.Pagamento.objects.all()
