@@ -32,4 +32,4 @@ until DB_ready; do
 done
 >&2 echo 'Postgres is available'
 
-python src/manage.py $@
+python /opt/application/manage.py $@

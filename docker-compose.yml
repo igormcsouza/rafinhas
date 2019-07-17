@@ -31,5 +31,5 @@ services:
     ports:
       - 8000:8000
     volumes:
-      - .:/opt/app
+      - ./application:/opt/application
     command: ['runserver', '0.0.0.0:8000']
