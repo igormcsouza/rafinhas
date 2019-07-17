@@ -22,8 +22,9 @@ Muito simples, como nossa aplicação está usando docker, você não precisa se
 Apenas execute "docker-compose up -d" e pronto, sua aplicação estará rodando normalmente. Em qualquer dos casos execute "docker-compose down" para derrubar a aplicação. Veja [Problemas Solucionados](#problemas-solucionados) para maiores duvidas.
 
 ### Para rodar testes???
+Sim, da sim, inclusive já existe um sob medida, basta executar "docker-compose run --rm app test rafinhas.tests.Fluxo"
 
-Sempre que houver alterações no Dockerfile ou no docker-compose, deve ser dado um --build, para que a alteração seja feita com sucesso.
+IMPORTANTE: Sempre que houver alterações no Dockerfile ou no docker-compose, deve ser dado um --build, para que a alteração seja feita com sucesso.
 
 ## Estudos Importantes
 - Como funciona o Django Database? Na [documentação](https://docs.djangoproject.com/en/2.2/intro/tutorial01/) explica sobre como usar o Django Models. Vale a pena ler antes de usar a aplicação.
