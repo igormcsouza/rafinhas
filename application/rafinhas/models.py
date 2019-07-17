@@ -16,7 +16,7 @@ class Carro(models.Model):
     cliente = models.ForeignKey(
         Cliente,
         on_delete=models.CASCADE,
-        default= Cliente.objects.first().id
+        default=1 #Cliente.objects.first().id
     )
 
     def __str__(self):
@@ -28,7 +28,7 @@ class Defeito(models.Model):
     carro = models.ForeignKey(
         Carro,
         on_delete=models.CASCADE,
-        default=Carro.objects.first().id
+        default=1 #Carro.objects.first().id
     )
 
     def __str__(self):
@@ -51,7 +51,7 @@ class Pagamento(models.Model):
     financas = models.ForeignKey(
         Financas,
         on_delete=models.CASCADE,
-        default=Financas.objects.first().id
+        default=1 #Financas.objects.first().id
     )
 
     def __str__(self):
@@ -63,7 +63,7 @@ class FormaDePagamento(models.Model):
     pagamento = models.ForeignKey(
         Pagamento,
         on_delete=models.CASCADE,
-        default=Pagamento.objects.first().id
+        default=1 #Pagamento.objects.first().id
     )
 
     def __str__(self):
@@ -85,7 +85,7 @@ class Retirada(models.Model):
     financas = models.ForeignKey(
         Financas,
         on_delete=models.CASCADE,
-        default=Financas.objects.first().id
+        default=1 #Financas.objects.first().id
     )
 
     def __str__(self):
@@ -115,12 +115,12 @@ class Servico(models.Model):
     operacao = models.ForeignKey(
         Operacao,
         on_delete=models.CASCADE,
-        default=Operacao.objects.first().id
+        default=1 #Operacao.objects.first().id
     )
     operador = models.ForeignKey(
         Funcionario,
         on_delete=models.CASCADE,
-        default=Funcionario.objects.first().id
+        default=1 #Funcionario.objects.first().id
     )
 
     # Deve haver mais um campo para vendedor

@@ -1,21 +1,21 @@
 FROM python:3.7-alpine
-# MAINTAINER Dual Junior
 
 ENV PYTHONUNBUFFERED 1
 
-COPY ./requirements.txt /requirements.txt
-RUN \
- apk add --no-cache python3 postgresql-libs && \
- apk add --no-cache --virtual .build-deps gcc python3-dev musl-dev postgresql-dev && \
- python3 -m pip install -r requirements.txt --no-cache-dir && \
- apk --purge del .build-deps
+COPY ./requirements.txt /tmp/requirements.txt
 
-RUN mkdir /application
-WORKDIR /application
-COPY ./application /application
+COPY ./docker-entrypoint.sh /docker-entrypoint.sh
 
-# Security Propourses
-RUN adduser -D user
-USER user
+RUN apk update && \
+    apk add --no-cache python3 postgresql-libs && \
+    apk add --no-cache --virtual .build-deps gcc python3-dev musl-dev postgresql-dev && \
+    chmod +x /docker-entrypoint.sh && \
+    pip install --upgrade pip && \
+    pip install -r /tmp/requirements.txt --no-cache-dir && \
+    apk --purge del .build-deps 
+    
+COPY ./application /opt/application
 
+WORKDIR /opt/application
 
+ENTRYPOINT [ "/docker-entrypoint.sh" ]
