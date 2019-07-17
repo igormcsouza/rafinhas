@@ -20,8 +20,8 @@ services:
     environment:
       DJANGO_DEBUG: 1
       DB_HOST: postgres
-      DB_NAME: toteemi
-      DB_USER: toteemi
+      DB_NAME: rafinhas
+      DB_USER: rafinhas
       DB_PASSWORD: secret
       DB_PORT: 5432
     depends_on:
