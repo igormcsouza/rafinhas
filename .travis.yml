@@ -6,4 +6,5 @@ services:
 
 before_script: pip install docker-compose
 script:
-  - docker-compose run --rm app test rafinhas.tests.Fluxo && flake8
+  - docker-compose run --rm app test rafinhas.tests.Fluxo
+  - docker-compose run --rm app flake8
