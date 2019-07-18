@@ -1,9 +1,9 @@
 language: python
-version: "3.7.3"
+version: "3.6"
 
 services:
   - docker
 
-before_scripts: pip install docker-compose
-scripts:
-  - docker-compose run --rm app test rafinhas.tests.Fluxo
+before_script: pip install docker-compose
+script:
+  - docker-compose run --rm app test rafinhas.tests.Fluxo && flake8
