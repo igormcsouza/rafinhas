@@ -23,7 +23,7 @@ class Fluxo(TestCase):
         print("Nova operacao: {0}".format(hoje))
 
         # Início do fluxo -----------------------------------------------------
-        print("Cliente chega no lava jato...")
+        print("\n\nCliente chega no lava jato...")
         antonio = Cliente(nome="Antonio Duarte", telefone1='85987474111')
         antonio.save()
         print("ID do novo cliente: {0}".format(antonio.id))
