@@ -1,10 +1,14 @@
 language: python
-version: "3.6"
+
+sudo: required
 
 services:
   - docker
 
-before_script: pip install docker-compose
+before_script: 
+  - docker-compose up -d
+  - docker ps
+
 script:
   - docker-compose run --rm app test rafinhas.tests.Fluxo &&
   - docker-compose run --rm app flake8
