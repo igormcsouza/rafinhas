@@ -1,0 +1,1 @@
+docker-compose run --rm app makemigrations && docker-compose run --rm app migrate
