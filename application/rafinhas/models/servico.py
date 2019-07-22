@@ -28,15 +28,11 @@ class Servico(models.Model):
         on_delete=models.CASCADE,
         null=True
     )
-    operacao = models.ForeignKey(
-        Operacao,
-        on_delete=models.CASCADE,
-        default=1 #Operacao.objects.first().id
-    )
+    operacao = models.ManyToManyField(Operacao)
     operador = models.ForeignKey(
         colaborador.Funcionario,
         on_delete=models.CASCADE,
-        default=1 #Funcionario.objects.first().id
+        default=1
     )
 
     # Deve haver mais um campo para vendedor
