@@ -50,12 +50,14 @@ class Fluxo(TestCase):
         print("O cadastro do serviço é efetuado pelo operador...")
         servico = Servico()
         servico.codigo='ASW123'
-        servico.tipo='Lavagem'
+        servico.tipo='Lava Jato'
         servico.carro=renault
         servico.finalizado=False
         servico.comentarios='Vai pegar no fim do dia'
         servico.operador = flavio
         # Incluindo 2 tipos de operacao
+        servico.save()
+
         servico.operacao.add(lavagem)
         servico.operacao.add(troca)
         servico.save()
