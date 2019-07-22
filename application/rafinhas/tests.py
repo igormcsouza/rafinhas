@@ -56,8 +56,6 @@ class Fluxo(TestCase):
         servico.comentarios='Vai pegar no fim do dia'
         servico.operador = flavio
         # Incluindo 2 tipos de operacao
-        servico.save()
-
         servico.operacao.add(lavagem)
         servico.operacao.add(troca)
         servico.save()
