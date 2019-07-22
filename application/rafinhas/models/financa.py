@@ -31,7 +31,7 @@ class Pagamento(models.Model):
     )
 
     def __str__(self):
-        return 'Valor de ' + str(self.valor) 
+        return 'Valor de ' + str(self.valor) + '. Efetuado por ' + 'CLIENTE?'
 
 class FormaDePagamento(models.Model):
     tipo = models.CharField(max_length=25)

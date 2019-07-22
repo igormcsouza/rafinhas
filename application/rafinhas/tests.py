@@ -55,6 +55,8 @@ class Fluxo(TestCase):
         servico.finalizado=False
         servico.comentarios='Vai pegar no fim do dia'
         servico.operador = flavio
+        servico.save()
+
         # Incluindo 2 tipos de operacao
         servico.operacao.add(lavagem)
         servico.operacao.add(troca)
@@ -71,7 +73,7 @@ class Fluxo(TestCase):
         # Erro aqui, o cliente pode pedir mais de uma operação
         print("O cliente chega para buscar o carro e pergunta o valor do serviço...")
         valor = 0
-        for i in servico.operacao:
+        for i in servico.operacao.all():
             valor += i.valor
         print("O custo foi {0}".format(valor))
 
