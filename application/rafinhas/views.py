@@ -1,47 +1,50 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from rest_framework import viewsets
-from . import models
+from .models.colaborador import *
+from .models.financa import *
+from .models.relacionamento import *
+from .models.servico import *
 from . import serializers
 
 class ClienteView(viewsets.ModelViewSet):
-    queryset = models.Cliente.objects.all()
+    queryset = Cliente.objects.all()
     serializer_class = serializers.ClienteSerializer
 
 class CarroView(viewsets.ModelViewSet):
-    queryset = models.Carro.objects.all()
+    queryset = Carro.objects.all()
     serializer_class = serializers.CarroSerializer
 
 class DefeitoView(viewsets.ModelViewSet):
-    queryset = models.Defeito.objects.all()
+    queryset = Defeito.objects.all()
     serializer_class = serializers.DefeitoSerializer
 
 class ServicoView(viewsets.ModelViewSet):
-    queryset = models.Servico.objects.all()
+    queryset = Servico.objects.all()
     serializer_class = serializers.ServicoSerializer
 
 class OperacaoView(viewsets.ModelViewSet):
-    queryset = models.Operacao.objects.all()
+    queryset = Operacao.objects.all()
     serializer_class = serializers.OperacaoSerializer
 
 class TransacaoView(viewsets.ModelViewSet):
-    queryset = models.Transacao.objects.all()
+    queryset = Transacao.objects.all()
     serializer_class = serializers.TransacaoSerializer
 
 class PagamentoView(viewsets.ModelViewSet):
-    queryset = models.Pagamento.objects.all()
+    queryset = Pagamento.objects.all()
     serializer_class = serializers.PagamentoSerializer
 
 class FormaDePagamentoView(viewsets.ModelViewSet):
-    queryset = models.FormaDePagamento.objects.all()
+    queryset = FormaDePagamento.objects.all()
     serializer_class = serializers.FormaDePagamentoSerializer
 
 class RetiradaView(viewsets.ModelViewSet):
-    queryset = models.Retirada.objects.all()
+    queryset = Retirada.objects.all()
     serializer_class = serializers.RetiradaSerializer
 
 class FuncionarioView(viewsets.ModelViewSet):
-    queryset = models.Funcionario.objects.all()
+    queryset = Funcionario.objects.all()
     serializer_class = serializers.FuncionarioSerializer
 
 
