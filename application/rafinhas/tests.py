@@ -5,7 +5,7 @@ from .models.relacionamento import *
 from .models.servico import *
 
 class Fluxo(TestCase):
-    def test_novoCliente(self):
+    def novo_cliente(self):
         print("\n\nIniciando os Testes de Fluxo...")
 
         # Para propósitos de teste
@@ -79,6 +79,7 @@ class Fluxo(TestCase):
 
         print("O cliente então efetua o pagamento...")
         pag = Pagamento()
+        pag.cliente=antonio
         pag.efetuado=True
         pag.valor = 0
         pag.transacao = hoje # O certo mesmo é procurar pela transacao de hoje
@@ -106,6 +107,61 @@ class Fluxo(TestCase):
         print("O servico foi finalizado? {0}".format(servico.finalizado))
 
         print("O fluxo foi finalizado com sucesso! 2 Erros de Banco para concertar!!")
+        print("\n               ***               \n")
 
-        
+    def novo_estacionamento(self):
+        print("Construindo...")
+        print("\n               ***               \n")
+
+    def retirada(self):
+        print("\nUm colaborador descide almoçar e usa dinheiro da empresa...")
+
+        # Para propósitos de teste
+        print("Um novo funcionário é cadastrado...")
+        sergio = Funcionario(nome='Sergio', loggin='2', papel='Operador')
+        sergio.save()
+        print("Novo funcionario: {0}".format(sergio))
+
+        print("Criando uma nova transação...")
+        hoje = Transacao()
+        hoje.caracteristica = 'Saida'
+        hoje.save()
+        print("Nova operacao: {0}".format(hoje))
+
+        # Fluxo
+        almoco = Retirada()
+        almoco.operador = sergio
+        almoco.tipo = 'Almoço de Funcionários'
+        almoco.valor = 15
+        almoco.transacao = hoje
+        print("\n\nA saida foi registrada... {0}".format(almoco))
+        print("\n               ***               \n")
+
+    def fluxo_caixa(self):
+        print("\nVamos rever o fluxo de caixa...")
+        saidas = Transacao.objects.filter(caracteristica='Saida')
+        print("Aqui estão todas as saidas: {0}".format(saidas))
+        entradas = Transacao.objects.filter(caracteristica='Entrada')
+        print("Aqui estão todas as entradas: {0}".format(entradas))
+
+        perda = 0
+        for j in saidas:
+            for i in Pagamento.objects.filter(transacao=j):
+                perda += i.valor
+
+        ganho = 0
+        for j in entradas:
+            for i in Retirada.objects.filter(transacao=j):
+                ganho += i.valor
+
+        # Está mostrando 0... por que ??????
+        print("Houve R${0} de ganhos e R${1} de perdas. Lucro de R${2}!".format(
+            ganho, perda, ganho-perda
+        ))
+        print("\n               ***               \n")
+
+    def test_execute(self):
+        self.novo_cliente()
+        self.retirada()
+        self.fluxo_caixa()
 

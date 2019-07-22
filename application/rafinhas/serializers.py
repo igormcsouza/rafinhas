@@ -1,4 +1,4 @@
-from  rest_framework import serializers
+from rest_framework import serializers
 from .models.colaborador import *
 from .models.financa import *
 from .models.relacionamento import *
