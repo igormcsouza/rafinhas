@@ -15,18 +15,19 @@ class Transacao(models.Model):
         return self.caracteristica + 's do dia ' + str(self.data)
 
 class Retirada(models.Model):
-    funcionario = models.ForeignKey(
-        colaborador.Funcionario,
-        on_delete=models.CASCADE,
-        default=1
-    )
+    # Import ERROR
+    # funcionario = models.ForeignKey(
+    #     colaborador.Funcionario,
+    #     on_delete=models.CASCADE,
+    #     default=1
+    # )
     tipo = models.CharField(max_length=25)
     valor = models.FloatField()
     data = models.DateTimeField(auto_now_add=True, blank=True)
     transacao = models.ForeignKey(
         Transacao,
         on_delete=models.CASCADE,
-        default=1 #Transacao.objects.first().id
+        default=1
     )
 
     def __str__(self):
