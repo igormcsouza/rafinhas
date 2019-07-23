@@ -134,6 +134,7 @@ class Fluxo(TestCase):
         almoco.tipo = 'Almoço de Funcionários'
         almoco.valor = 15
         almoco.transacao = hoje
+        almoco.save()
         print("\n\nA saida foi registrada... {0}".format(almoco))
         print("\n               ***               \n")
 
@@ -146,12 +147,12 @@ class Fluxo(TestCase):
 
         perda = 0
         for j in saidas:
-            for i in Pagamento.objects.filter(transacao=j):
+            for i in Retirada.objects.filter(transacao=j):
                 perda += i.valor
 
         ganho = 0
         for j in entradas:
-            for i in Retirada.objects.filter(transacao=j):
+            for i in Pagamento.objects.filter(transacao=j):
                 ganho += i.valor
 
         # Está mostrando 0... por que ??????

@@ -5,6 +5,8 @@ class Cliente(models.Model):
     telefone1 = models.CharField(max_length=14)
     telefone2 = models.CharField(max_length=14, null=True)
 
+    def findCarroByCliente(self):
+        return Carro.objects.filter(cliente=self)
     def __str__(self):
         return self.nome
 
@@ -17,6 +19,8 @@ class Carro(models.Model):
         default=1 #Cliente.objects.first().id
     )
 
+    def findDefeitoByCarro(self):
+        return Defeito.objects.filter(carro=self)
     def __str__(self):
         return self.modelo
 

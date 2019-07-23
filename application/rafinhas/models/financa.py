@@ -7,11 +7,15 @@ class Transacao(models.Model):
     caracteristica = models.CharField(max_length=10)
     data = models.DateField(default=datetime.date.today)
 
+    def findAllRetiradaByTransacao(self):
+        return Retirada.objects.filter(transacao=self)
+    def findAllRecebimentoByTransacao(self):
+        return Pagamento.objects.filter(transacao=self)
     def __str__(self):
         return self.caracteristica + 's do dia ' + str(self.data)
 
 class Retirada(models.Model):
-    operador = models.ForeignKey(
+    funcionario = models.ForeignKey(
         colaborador.Funcionario,
         on_delete=models.CASCADE,
         default=1
@@ -35,15 +39,22 @@ class Pagamento(models.Model):
         default=1
     )
     efetuado = models.BooleanField()
-    valor = models.FloatField(null=True)
+    valor = models.FloatField(null=True) # Not necessary??
     transacao = models.ForeignKey(
         Transacao,
         on_delete=models.CASCADE,
         default=1 
     )
 
+    def FindAllFormaDePagamentoByPagamento(self):
+        return FormaDePagamento.objects.filter(pagamento=self)
+    def FindTotalCost(self):
+        valor = 0
+        for f in self.FindAllFormaDePagamentoByPagamento():
+            valor += f.valor
+        self.valor = valor
     def __str__(self):
-        return 'Valor de ' + str(self.valor) + '. Efetuado por ' + self.cliente.name
+        return 'Valor de ' + str(self.valor) + '. Efetuado por ' + self.cliente.nome
 
 class FormaDePagamento(models.Model):
     tipo = models.CharField(max_length=25)
